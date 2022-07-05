@@ -45,6 +45,13 @@ def get_all_posts():
     posts=db.session.query(BlogPost).all()
     return render_template("index.html",all_posts=posts)
 
+
+#RENDER POST USING DB - SHOWING THE POST INFO
+@app.route("/post/<int:index>")
+def show_post(index):
+    requested_post = db.session.query(BlogPost).get(index)
+    return render_template("post.html",post=requested_post)
+
 # ADDING NEW POST - THROUGH THE FORM METHOD
 @app.route("/new-post", methods=["GET", "POST"])
 def add_new_post():
@@ -62,12 +69,6 @@ def add_new_post():
         db.session.commit()
         return redirect(url_for("get_all_posts"))
     return render_template("make-post.html",form=form)
-
-#RENDER POST USING DB - SHOWING THE POST INFO
-@app.route("/post/<int:index>")
-def show_post(index):
-    requested_post = db.session.query(BlogPost).get(index)
-    return render_template("post.html",post=requested_post)
 
 #EDITING THE POST
 @app.route("/edit-post/<int:index>", methods=["GET", "POST"])
