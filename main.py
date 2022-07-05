@@ -45,7 +45,7 @@ def get_all_posts():
     posts=db.session.query(BlogPost).all()
     return render_template("index.html",all_posts=posts)
 
-# ADDING NEW POST
+# ADDING NEW POST - THROUGH THE FORM METHOD
 @app.route("/new-post", methods=["GET", "POST"])
 def add_new_post():
     form = CreatePostForm()
