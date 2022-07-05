@@ -73,7 +73,7 @@ def add_new_post():
 #EDITING THE POST
 @app.route("/edit-post/<int:index>", methods=["GET", "POST"])
 def edit_post(index):
-    post = BlogPost.query.get(index)
+    post = db.session.query(BlogPost).get(index)
     edit_form = CreatePostForm(
         title=post.title,
         subtitle=post.subtitle,
